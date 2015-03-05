@@ -7,13 +7,13 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 /**
- * Created by Maze on 04-03-2015.
+ * MCrypt Java to PHP / PHP to Java Class
  */
 public class MCryptJavaToPHP {
 
 	public static void main(String[] args) {
-		String encrypted = "";
-		String decrypted = "";
+		String encrypted;
+		String decrypted;
 
 		MCrypt mcrypt = new MCrypt();
 
@@ -39,9 +39,9 @@ public class MCryptJavaToPHP {
 
 			HashMap<String, String> params = new HashMap<String, String>();
 			//String value stored along with the key value in hash map
-			params.put("cliente", "cliente");
-			params.put("cotizacion", "cotizacion");
-			params.put("campana", "campana");
+			params.put("cliente", MCrypt.bytesToHex(mcrypt.encrypt("1")));
+			params.put("cotizacion", MCrypt.bytesToHex(mcrypt.encrypt("2")));
+			params.put("campana", MCrypt.bytesToHex(mcrypt.encrypt("camara")));
 
 			System.out.println(fullURL(baseurl, params));
 
@@ -52,7 +52,7 @@ public class MCryptJavaToPHP {
 
 	public static String fullURL(String urlBase, HashMap<String, String> params) {
 		for (Entry<String, String> entry : params.entrySet()) {
-			String param = entry.getKey().toString() + "=" + entry.getValue() + "&";
+			String param = entry.getKey() + "=" + entry.getValue() + "&";
 			urlBase = urlBase.concat(param);
 		}
 
